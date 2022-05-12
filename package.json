@@ -29,5 +29,8 @@
   "homepage": "https://github.com/timofeji/sim-kit#readme",
   "devDependencies": {
     "typescript": "^4.6.4"
+  },
+  "dependencies": {
+    "querystring": "^0.2.1"
   }
 }

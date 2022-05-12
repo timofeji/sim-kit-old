@@ -1,5 +1,4 @@
-import { mat4 } from "gl-matrix";
-import { parse } from "querystring";
+import matrix4 from "./math/matrix4";
 import { vec3 } from "./math";
 import { IMaterial } from "./types/IMaterial";
 import { IMesh } from "./types/IMesh";
@@ -9,7 +8,7 @@ export class Box3D implements IMesh{
     m_INDICES: any;
     m_NORMALS: any;
     m_TEXCOORDS: Array<number>;
-    m_modelMatrix: mat4;
+    m_modelMatrix: matrix4;
     v_position: vec3;
 
 
@@ -163,7 +162,7 @@ export class Box3D implements IMesh{
                 0.0, -1.0, 0.0,    //0, 1,
             ]
 
-            this.m_modelMatrix = mat4.create();
+            this.m_modelMatrix = matrix4.create();
             this.v_position = new vec3(0,0,0);
         }
 }
@@ -174,7 +173,7 @@ export class Plane3D implements IMesh {
     m_NORMALS: any;
     m_INDICES: any;
     m_TEXCOORDS: Array<number>;
-    m_modelMatrix:mat4;
+    m_modelMatrix:matrix4;
     v_position: vec3;
 
     IBO: WebGLBuffer;
@@ -220,7 +219,7 @@ export class Plane3D implements IMesh {
             0.0,  1.0
         ];
 
-        this.m_modelMatrix = mat4.create();
+        this.m_modelMatrix = matrix4.create();
         this.v_position = new vec3(0,0,0);
     }
 }
@@ -230,7 +229,7 @@ export class Object3D implements IMesh {
     m_INDICES: any;
     m_NORMALS: any;
     m_TEXCOORDS: any;
-    m_modelMatrix:mat4;
+    m_modelMatrix:matrix4;
     v_position: vec3;
 
     IBO: WebGLBuffer;
@@ -250,7 +249,7 @@ export class Object3D implements IMesh {
         this.m_NORMALS = []; 
         this.m_TEXCOORDS = []; 
 
-        this.m_modelMatrix = mat4.create();
+        this.m_modelMatrix = matrix4.create();
         this.v_position = new vec3(0,0,0);
     }
 }
@@ -301,8 +300,6 @@ export function loadOBJMesh(text: string): Object3D {
             console.log(parsedFace);
         }
     });
-
-    // console.log(vertexIndices.join());
 
     const vertices = [];
     const normals = [];
