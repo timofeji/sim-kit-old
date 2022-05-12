@@ -1,10 +1,12 @@
 import { ISimulation } from "./types/ISimulation";
 import { IMesh } from "./types/IMesh";
 import { IEntity } from "./types/IEntity";
-import { mat4, glMatrix } from "gl-matrix";
 import { Box3D, Plane3D, loadOBJMesh } from "./geometry";
 import { vec3 } from "./math";
 import { DefaultMaterial, IMaterial } from "./types/IMaterial";
+
+import matrix4 from "./math/matrix4";
+import { RMath } from "./math/rmath";
 
 var matWorldUniformLocation: WebGLUniformLocation;
 var matModelUniformLocation: WebGLUniformLocation;
@@ -16,7 +18,7 @@ var timeUniformLocation: WebGLUniformLocation;
 var shininessUniformLocation: WebGLUniformLocation;
 
 let identityMatrix = new Float32Array(16);
-mat4.identity(identityMatrix);
+matrix4.identity(identityMatrix);
 
 let posAttribLocation: number;
 let texAttribLocation: number;
@@ -92,7 +94,7 @@ export class World {
 }
 
 export function resize(gl: WebGLRenderingContext, w: number, h: number) {
-    mat4.perspective(projMatrix, glMatrix.toRadian(90), w /h, 0.1, 1000.0);
+    matrix4.perspective(projMatrix, RMath.toRadian(90), w/h, 0.1, 1000.0);
     gl.viewport(0, 0, w,h);
     gl.uniformMatrix4fv(matProjUniformLocation, false, projMatrix);
 }
@@ -172,8 +174,6 @@ export async function initRenderer(game: ISimulation) {
     var image = new Image();
     image.src = "../assets/dev-texture.png";
     image.addEventListener("load", () => {
-        // Now that the image has loaded make copy it to the texture.
-
         gl.bindTexture(gl.TEXTURE_2D, devTexture);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
@@ -184,8 +184,6 @@ export async function initRenderer(game: ISimulation) {
     var image2 = new Image();
     image2.src = "../assets/f-texture.png";
     image2.addEventListener("load", () => {
-        // Now that the image has loaded make copy it to the texture.
-
         gl.bindTexture(gl.TEXTURE_2D, texture2);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image2);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
@@ -207,10 +205,10 @@ export async function initRenderer(game: ISimulation) {
 
 
 
-    mat4.identity(worldMatrix);
-    mat4.identity(modelMatrix);
-    mat4.lookAt(viewMatrix, [0, 0, 6], [0, 0, 0], [0, 1, 0]);
-    mat4.perspective(projMatrix, glMatrix.toRadian(90), gl.canvas.width/gl.canvas.height, 0.1, 1000.0);
+    matrix4.identity(worldMatrix);
+    matrix4.identity(modelMatrix);
+    matrix4.lookAt(viewMatrix, [0, 0, 6], [0, 0, 0], [0, 1, 0]);
+    matrix4.perspective(projMatrix, RMath.toRadian(90), gl.canvas.width/gl.canvas.height, 0.1, 1000.0);
 
     gl.viewport(0, 0, window.innerWidth, window.innerHeight);
 
@@ -240,7 +238,7 @@ export function render(game: ISimulation, deltaTime: number) {
 
 
     world.objects.forEach((renderObject) => {
-        mat4.translate(renderObject.m_modelMatrix, identityMatrix, [renderObject.v_position.X, renderObject.v_position.Y, renderObject.v_position.Z]);
+        matrix4.translate(renderObject.m_modelMatrix, identityMatrix, [renderObject.v_position.X, renderObject.v_position.Y, renderObject.v_position.Z]);
 
         gl.uniformMatrix4fv(matModelUniformLocation, false, renderObject.m_modelMatrix);
 

@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "description": "small rendering engine in typescript",
   "main": "dist/engine.js",
+  "types": "dist/engine.d.ts",
   "directories": {
-    "example": "examples",
     "test": "tests"
   },
+ "files": [
+    "/dist"
+  ],
   "scripts": {
-    "start": "tsc && node dist/engine.js",
-    "test": "test/test.ts"
+    "start": "npx tsc && node dist/engine.js && cp -r ./src/shaders/. ./dist/shaders/",
+    "test": "npx tsx && node dist/engine-test.ts ./*-test.js"
   },
   "repository": {
     "type": "git",

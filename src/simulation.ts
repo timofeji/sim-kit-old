@@ -1,8 +1,8 @@
-import { mat4 } from "gl-matrix";
 import { vec3, VMath } from "./math";
 import { World, viewMatrix } from "./renderer";
 import { ISimulation } from "./types/ISimulation";
 
+import matrix4 from "./math/matrix4";
 
 let CAM_SPEED = 200
 
@@ -36,7 +36,6 @@ document.addEventListener("keydown", onKeyDown, false);
 document.addEventListener("mousedown", onMouseUp, false);
 document.addEventListener("mouseup", onMouseDown, false);
 
-// Update view in simulation since mat transforms are expensive 
 let updateView = (world: World) => {
 
 
@@ -46,7 +45,7 @@ let updateView = (world: World) => {
 
 
 
-    mat4.lookAt(
+    matrix4.lookAt(
         viewMatrix,
         [
             world.camera.v_position.X,

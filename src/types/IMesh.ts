@@ -1,6 +1,7 @@
-import { mat4 } from "matrix";
 import { vec3 } from "../math";
 import { IMaterial } from "./IMaterial";
+
+import matrix4 from "../math/matrix4";
 
 
 export interface IMesh{
@@ -9,7 +10,7 @@ export interface IMesh{
     m_INDICES: Array<number>;
     m_TEXCOORDS: Array<number>;
     v_position: vec3;
-    m_modelMatrix: mat4;
+    m_modelMatrix: matrix4;
 
     IBO: WebGLBuffer; // Index Buffer
     VBO: WebGLBuffer; // Vertex Buffer
