@@ -1,0 +1,33 @@
+{
+  "name": "sim-kit",
+  "version": "1.0.0",
+  "description": "small rendering engine in typescript",
+  "main": "dist/engine.js",
+  "directories": {
+    "example": "examples",
+    "test": "tests"
+  },
+  "scripts": {
+    "start": "tsc && node dist/engine.js",
+    "test": "test/test.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timofeji/sim-kit.git"
+  },
+  "keywords": [
+    "game",
+    "engine",
+    "simulation",
+    "rendering"
+  ],
+  "author": "timofej jermolaev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/timofeji/sim-kit/issues"
+  },
+  "homepage": "https://github.com/timofeji/sim-kit#readme",
+  "devDependencies": {
+    "typescript": "^4.6.4"
+  }
+}

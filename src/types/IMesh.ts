@@ -1,4 +1,4 @@
-import { mat4 } from "gl-matrix";
+import { mat4 } from "matrix";
 import { vec3 } from "../math";
 import { IMaterial } from "./IMaterial";
 

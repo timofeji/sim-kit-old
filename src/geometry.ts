@@ -68,7 +68,7 @@ export class Box3D implements IMesh{
             [
                 // Top
                 0, 1, 2,
-                2, 3, 0,
+                0, 2, 3,
 
                 // Left
                 5, 4, 6,
@@ -265,8 +265,6 @@ export function parseFace(string:string) {
     })
 }
 
-
-
 export function loadOBJMesh(text: string): Object3D {
     const _vertices: any = [];
     const _normals: any = [];
@@ -276,50 +274,36 @@ export function loadOBJMesh(text: string): Object3D {
     const normalIndices: any = [];
     const texCoordIndices: any = [];
 
-    let bQuad = false;
-
-    text.split("\n").forEach((line) => {
-      if (line.startsWith("v ")) {
-        _vertices.push(parseVec(line, "v "));
-      }
-
-      if (line.startsWith("vn ")) {
-        _normals.push(parseVec(line, "vn "));
-      }
-
-      if (line.startsWith("vt ")) {
-        _texCoords.push(parseVec(line, "vt "));
-      }
-
-      if (line.startsWith("f ")) {
-        const parsedFace = parseFace(line);
-        let len = parsedFace.length;
-
-        if(len < 3){
-            bQuad = true;
+    text.split('\n').forEach(line => {
+        if (line.startsWith('v ')) {
+            _vertices.push(parseVec(line, 'v '));
         }
 
-        for (let i = 0; i < len ; i++) {
-            vertexIndices.push(parsedFace[i%len][0] - 1);
-            console.log(vertexIndices);
+        if (line.startsWith('vn ')) {
+            _normals.push(parseVec(line, 'vn '));
         }
 
+        if (line.startsWith('vt ')) {
+            _texCoords.push(parseVec(line, 'vt '));
+        }
 
-        // if quad run loop twice to triangulate 
-        // for (let j = 0; j < len - 2; ++j) {
-        //   for (let i = j*2; i < 3 + j*2; ++i) {
+        if (line.startsWith('f ')) {
+            const parsedFace = parseFace(line);
 
+            vertexIndices.push(...parsedFace.map(face => face[0]));
+            texCoordIndices.push(...parsedFace.map(face => face[1] - 1));
+            normalIndices.push(...parsedFace.map(face => face[2] - 1));
 
-        //     console.log(i);
+            // parsedFace.map(face => {
+            //     vertexIndices.push(face[0]);
+            // })
 
-        //     vertexIndices.push(parsedFace[i%len][0]-1);
-        //     texCoordIndices.push(parsedFace[i % len][1]  );
-        //     normalIndices.push(parsedFace[i % len][2] );
-
-        //   }
-        // }
-      }
+            console.log(parsedFace);
+        }
     });
+
+    // console.log(vertexIndices.join());
+
     const vertices = [];
     const normals = [];
     const texCoords = [];
@@ -333,8 +317,6 @@ export function loadOBJMesh(text: string): Object3D {
         const normal = _normals[normalIndex];
         const texCoord = _texCoords[texCoordIndex];
 
-
-
         if (vertex) {
             vertices.push(...vertex);
         }
@@ -345,16 +327,13 @@ export function loadOBJMesh(text: string): Object3D {
         if (texCoord) {
             texCoords.push(...texCoord);
         }
-
-
     }
-
 
     let mesh = new Object3D();
     mesh.m_VERTICES = new Float32Array(vertices);
     mesh.m_NORMALS = new Float32Array(normals);
     mesh.m_TEXCOORDS = new Float32Array(texCoords);
-    mesh.m_INDICES = new Uint16Array(vertexIndices);
+    mesh.m_INDICES = new Float32Array(vertexIndices);
 
 
     return mesh;

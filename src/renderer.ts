@@ -104,7 +104,7 @@ export async function initRenderer(game: ISimulation) {
     let fragShader = await (await fetch("../shaders/frag.glsl")).text();
     let vertShader = await (await fetch("../shaders/vert.glsl")).text();
 
-    const obj = await (await fetch("../assets/pyr.obj")).text();
+    const obj = await (await fetch("../assets/monkey.obj")).text();
     const teapot = await (await fetch("../assets/teapot.obj")).text();
     let model = loadOBJMesh(obj);
     
@@ -226,8 +226,6 @@ export function render(game: ISimulation, deltaTime: number) {
     let gl = game.gl;
     let world = game.world;
 
-    
-
 
     gl.uniform1f(timeUniformLocation, performance.now());
     gl.uniformMatrix4fv(matViewUniformLocation, false, viewMatrix);
@@ -245,6 +243,8 @@ export function render(game: ISimulation, deltaTime: number) {
         mat4.translate(renderObject.m_modelMatrix, identityMatrix, [renderObject.v_position.X, renderObject.v_position.Y, renderObject.v_position.Z]);
 
         gl.uniformMatrix4fv(matModelUniformLocation, false, renderObject.m_modelMatrix);
+
+
 
         if (renderObject.material) {
             gl.bindTexture(gl.TEXTURE_2D, renderObject.material.texture);
