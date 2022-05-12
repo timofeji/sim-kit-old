@@ -25,3 +25,8 @@ jobs:
     - name: Build
       run: |
         npm install
+        tsc
+
+    - uses: JS-DevTools/npm-publish@v1
+      with:
+        token: ${{ secrets.NPM_TOKEN }}
