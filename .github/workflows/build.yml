@@ -13,6 +13,10 @@ jobs:
     strategy:
       matrix:
         node-version: [12.x, 14.x, 16.x]
+    with: 
+      super_secret: ${{ secrets.NPM_TOKEN }}
+    env: # 
+      super_secret: ${{ secrets.NPM_TOKEN }}
     
     steps:
     - uses: actions/checkout@v3
