@@ -54,6 +54,7 @@ files.forEach((file) => {
 		return;
 	}
 	console.log(fileName);
+	console.log(__filename);
     require(fileName);
 });
 
