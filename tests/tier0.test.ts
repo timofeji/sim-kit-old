@@ -48,7 +48,7 @@ describe("tier-0", () => {
 });
 
 files.forEach((file) => {
-	let fileName = `${__dirname}\\${file}`;
+	let fileName = `${__dirname}/${file}`;
 	if(fileName == __filename)
 	{
 		return;
