@@ -2,11 +2,11 @@ import { ISimulation } from "./types/ISimulation";
 import { IMesh } from "./types/IMesh";
 import { IEntity } from "./types/IEntity";
 import { Box3D, Plane3D, loadOBJMesh } from "./geometry";
-import { vec3 } from "./math";
 import { DefaultMaterial, IMaterial } from "./types/IMaterial";
 
 import matrix4 from "./math/matrix4";
 import { RMath } from "./math/rmath";
+import { vector3 } from "./math/vector3";
 
 var matWorldUniformLocation: WebGLUniformLocation;
 var matModelUniformLocation: WebGLUniformLocation;
@@ -38,8 +38,8 @@ export class Camera {
     pitch: number;
     yaw: number;
     dist: number;
-    v_position: vec3;
-    v_lookAt: vec3;
+    v_position: vector3;
+    v_lookAt: vector3;
 }
 
 let box = new Box3D();
@@ -51,8 +51,8 @@ export class World {
 
     constructor() {
         this.camera = new Camera();
-        this.camera.v_position = new vec3(0, 0, 6);
-        this.camera.v_lookAt = new vec3(0, 0, 0);
+        this.camera.v_position = new vector3(0, 0, 6);
+        this.camera.v_lookAt = new vector3(0, 0, 0);
         this.camera.pitch = 0;
         this.camera.yaw = 0;
         this.camera.dist = 6;
@@ -60,9 +60,9 @@ export class World {
 
         let box2 = new Box3D();
         let box = new Box3D();
-        box2.v_position = new vec3(0, 2, 0);
-        plane.v_position = new vec3(0, -1, 0);
-        box.v_position = new vec3(2, 0, 0);
+        box2.v_position = new vector3(0, 2, 0);
+        plane.v_position = new vector3(0, -1, 0);
+        box.v_position = new vector3(2, 0, 0);
     }
 
     addMesh(gl: WebGLRenderingContext, mesh: IMesh) {
@@ -146,10 +146,10 @@ export async function initRenderer(game: ISimulation) {
     nmlAttribLocation = gl.getAttribLocation(glProgram, "a_normal");
 
     let boxer = new Box3D();
-    boxer.v_position = new vec3(2,0,0);
-    model.v_position = new vec3(0,4,0);
+    boxer.v_position = new vector3(2,0,0);
+    model.v_position = new vector3(0,4,0);
     let plane = new Plane3D();
-    plane.v_position = new vec3(0,-1,0);
+    plane.v_position = new vector3(0,-1,0);
     game.world.addMesh(game.gl, box);
     game.world.addMesh(game.gl, plane);
     game.world.addMesh(game.gl, boxer);

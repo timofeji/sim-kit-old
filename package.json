@@ -11,8 +11,8 @@
     "/dist"
   ],
   "scripts": {
-    "start": "npx tsc && node dist/engine.js && cp -r ./src/shaders/. ./dist/shaders/",
-    "test": "npx tsx && node dist/engine-test.ts ./*-test.js"
+    "start": "tsc && node dist/engine.js && cp -r ./src/shaders/. ./dist/shaders/",
+    "test": "tsc --p tests && node ./tests/tier0.test.js"
   },
   "repository": {
     "type": "git",

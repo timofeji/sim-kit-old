@@ -1,8 +1,9 @@
-import { vec3, VMath } from "./math";
 import { World, viewMatrix } from "./renderer";
 import { ISimulation } from "./types/ISimulation";
 
 import matrix4 from "./math/matrix4";
+import { vector3 } from "./math/vector3";
+import { VMath } from "./math/vmath";
 
 let CAM_SPEED = 200
 
@@ -70,7 +71,7 @@ export function simulate(game: ISimulation, deltaTime: number) {
     let cam = game.world.camera;
     let v_dir = VMath.sub(cam.v_lookAt, cam.v_position).normalize();
 
-    let camRight = VMath.cross(v_dir, new vec3(0,1,0)).normalize();
+    let camRight = VMath.cross(v_dir, new vector3(0,1,0)).normalize();
     let camUp = VMath.cross(v_dir, camRight);
 
     if (keys["a"]) {
@@ -98,7 +99,7 @@ export function simulate(game: ISimulation, deltaTime: number) {
     }
 
     if(game.world.objects.length > 1){
-        game.world.objects[0].v_position = new vec3( -1 - Math.sin(performance.now() / 1000),0, 0);
+        game.world.objects[0].v_position = new vector3( -1 - Math.sin(performance.now() / 1000),0, 0);
     }
     if(bMouseDown){
 

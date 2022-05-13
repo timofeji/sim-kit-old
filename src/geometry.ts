@@ -1,5 +1,5 @@
 import matrix4 from "./math/matrix4";
-import { vec3 } from "./math";
+import { vector3 } from "./math/vector3";
 import { IMaterial } from "./types/IMaterial";
 import { IMesh } from "./types/IMesh";
 
@@ -9,7 +9,7 @@ export class Box3D implements IMesh{
     m_NORMALS: any;
     m_TEXCOORDS: Array<number>;
     m_modelMatrix: matrix4;
-    v_position: vec3;
+    v_position: vector3;
 
 
     IBO: WebGLBuffer;
@@ -163,7 +163,7 @@ export class Box3D implements IMesh{
             ]
 
             this.m_modelMatrix = matrix4.create();
-            this.v_position = new vec3(0,0,0);
+            this.v_position = new vector3(0,0,0);
         }
 }
 
@@ -174,7 +174,7 @@ export class Plane3D implements IMesh {
     m_INDICES: any;
     m_TEXCOORDS: Array<number>;
     m_modelMatrix:matrix4;
-    v_position: vec3;
+    v_position: vector3;
 
     IBO: WebGLBuffer;
     VBO: WebGLBuffer;
@@ -220,7 +220,7 @@ export class Plane3D implements IMesh {
         ];
 
         this.m_modelMatrix = matrix4.create();
-        this.v_position = new vec3(0,0,0);
+        this.v_position = new vector3(0,0,0);
     }
 }
 
@@ -230,7 +230,7 @@ export class Object3D implements IMesh {
     m_NORMALS: any;
     m_TEXCOORDS: any;
     m_modelMatrix:matrix4;
-    v_position: vec3;
+    v_position: vector3;
 
     IBO: WebGLBuffer;
     VBO: WebGLBuffer;
@@ -250,7 +250,7 @@ export class Object3D implements IMesh {
         this.m_TEXCOORDS = []; 
 
         this.m_modelMatrix = matrix4.create();
-        this.v_position = new vec3(0,0,0);
+        this.v_position = new vector3(0,0,0);
     }
 }
 

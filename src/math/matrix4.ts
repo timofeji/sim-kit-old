@@ -1,13 +1,5 @@
 export default class matrix4 extends Float32Array {
-  static translate(m_modelMatrix: matrix4, identityMatrix: Float32Array, arg2: number[]) {
-      throw new Error("Method not implemented.");
-  }
-  static perspective(projMatrix: Float32Array, arg1: any, arg2: number, arg3: number, arg4: number) {
-    throw new Error("Method not implemented.");
-  }
-  static lookAt(viewMatrix: Float32Array, arg1: number[], arg2: number[], arg3: number[]) {
-    throw new Error("Method not implemented.");
-  }
+
   static create(): matrix4 {
     let mat = new Float32Array(15);
     mat[0] = 1;
@@ -34,4 +26,14 @@ export default class matrix4 extends Float32Array {
     mat[15] = 1;
     return mat;
   }
+  static translate(m_modelMatrix: matrix4, identityMatrix: Float32Array, arg2: number[]) {
+      throw new Error("Method not implemented.");
+  }
+  static lookAt(viewMatrix: Float32Array, arg1: number[], arg2: number[], arg3: number[]) {
+    throw new Error("Method not implemented.");
+  }
+  static perspective(projMatrix: Float32Array, arg1: any, arg2: number, arg3: number, arg4: number) {
+    throw new Error("Method not implemented.");
+  }
+  
 }
