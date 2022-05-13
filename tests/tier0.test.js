@@ -42,18 +42,18 @@ function run() {
     descriptions.forEach((d, i) => {
         try {
             d.fn();
-            console.log('\x1b[90m\x1b[47mRunning %s\x1b[0m', d.name);
+            console.log("\x1b[90m\x1b[47mRunning %s\x1b[0m", d.name);
             while (tests.length > 0) {
                 let test = tests.pop();
                 try {
                     test.fn();
-                    console.log("\x1b[30m\x1b[42m✅%s():\x1b[0m", test.name);
+                    console.log("---\x1b[30m\x1b[42m✅%s\x1b[0m", test.name);
                 }
                 catch (e) {
-                    console.log("\x1b[30m\x1b[41m❌%s():\x1b[0m", test.name);
+                    console.log("---\x1b[30m\x1b[41m❌%s\x1b[0m", test.name);
+                    console.log("---\x1b[30m\x1b[41m%s\x1b[0m", e.stack);
                 }
             }
-            console.log('\x1b[90m\x1b[47mRunning %s\x1b[0m', d.name);
         }
         catch (e) {
             console.log("\x1b[30m\x1b[41m❌%s():\x1b[0m", d.name);
@@ -64,28 +64,21 @@ function run() {
 const assert_1 = __importDefault(require("assert"));
 const fs = __importStar(require("fs"));
 let dirCont = fs.readdirSync(__dirname);
-let files = dirCont.filter((elm) => { return elm.match(/.*\.(test?)\.(js?)$/ig); });
-(0, exports.describe)('tier-0', () => {
-    (0, exports.test)('test works', () => {
+let files = dirCont.filter((elm) => {
+    return elm.match(/.*\.(test?)\.(js?)$/gi);
+});
+(0, exports.describe)("tier-0", () => {
+    (0, exports.test)("testing works", () => {
         assert_1.default.equal(2 + 2, 4);
     });
-    (0, exports.test)('test2 doesn\'t work', () => {
-        assert_1.default.equal(1 + 1, false);
-    });
 });
-(0, exports.describe)('tier-0.2', () => {
-    (0, exports.test)('test works', () => {
-        assert_1.default.equal(2 + 2, 4);
-    });
-    (0, exports.test)('test2 doesn\'t work', () => {
-        assert_1.default.equal(1 + 1, false);
-    });
-});
-files.forEach(file => {
-    if (__dirname + file == __filename) {
+files.forEach((file) => {
+    let fileName = `${__dirname}\\${file}`;
+    if (fileName == __filename) {
         return;
     }
-    console.log(__filename);
+    console.log(fileName);
+    require(fileName);
 });
 run();
 //# sourceMappingURL=tier0.test.js.map
