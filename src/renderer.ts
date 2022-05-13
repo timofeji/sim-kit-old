@@ -87,10 +87,8 @@ export class World {
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, mesh.IBO);
         gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(mesh.m_INDICES), gl.STATIC_DRAW);
 
-
         this.objects.push(mesh);
     }
-   
 }
 
 export function resize(gl: WebGLRenderingContext, w: number, h: number) {
