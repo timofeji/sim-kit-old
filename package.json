@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "start": "webpack && node dist/engine.js && cp -r ./src/shaders/. ./dist/shaders/",
-    "test": "webpack tests && node ./tests/tier0.test.js",
+    "test": "webpack --config webpack.test.config.js && node ./tests/tier0.test.js",
     "example": "tsc && node ./examples/run.js --",
     "build": "webpack --mode=production --node-env=production",
     "build:dev": "webpack --mode=development",
