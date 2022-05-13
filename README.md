@@ -1,4 +1,4 @@
-
+[![npm version](https://badge.fury.io/js/sim-kit.svg)](https://badge.fury.io/js/sim-kit)
 [![Build](https://github.com/timofeji/sim-kit/actions/workflows/build.yml/badge.svg)](https://github.com/timofeji/sim-kit/actions/workflows/build.yml)
 [![Test](https://github.com/timofeji/sim-kit/actions/workflows/test.yml/badge.svg)](https://github.com/timofeji/sim-kit/actions/workflows/test.yml)
 # sim-kit
