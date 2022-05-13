@@ -12,7 +12,8 @@
   ],
   "scripts": {
     "start": "tsc && node dist/engine.js && cp -r ./src/shaders/. ./dist/shaders/",
-    "test": "tsc --p tests && node ./tests/tier0.test.js"
+    "test": "tsc --p tests && node ./tests/tier0.test.js",
+    "example": "tsc && node ./examples/run.js --"
   },
   "repository": {
     "type": "git",

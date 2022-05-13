@@ -10,12 +10,13 @@ export const test = (name: any, fn: any) => {
   tests.push({ name, fn });
 };
 
-function run() {
+let run = () => {
   descriptions.forEach((d, i) => {
     try {
       d.fn();
       console.log("\x1b[90m\x1b[47mRunning %s\x1b[0m", d.name);
 
+	  tests.reverse();
       while (tests.length > 0) {
         let test = tests.pop();
         try {
@@ -41,11 +42,7 @@ let files = dirCont.filter((elm) => {
   return elm.match(/.*\.(test?)\.(js?)$/gi);
 });
 
-describe("tier-0", () => {
-  test("testing works", () => {
-    assert.equal(2 + 2, 4);
-  });
-});
+
 
 files.forEach((file) => {
 	let fileName = `${__dirname}/${file}`;
@@ -53,9 +50,14 @@ files.forEach((file) => {
 	{
 		return;
 	}
-	console.log(fileName);
-	console.log(__filename);
     require(fileName);
+});
+
+describe("T0", () => {
+  test("engine works", () => {
+    assert.equal(2+2 , 4);//-1 thats 3 quick maths
+    assert.equal(tests.length , 0);
+  });
 });
 
 run();
