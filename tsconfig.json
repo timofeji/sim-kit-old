@@ -1,10 +1,19 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": true,
-    "module": "es6",
-    "target": "es5",
-    "allowJs": true
+    "module": "ESNext",
+    "target": "ESNext",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "declaration": true,
+    "outDir": "dist"
   },
-  "files": ["src/index.ts"]
+  "lib": [
+    "es2019",
+    "dom"
+  ],
+  "include": [
+    "src/**/*",
+    "webpack.config.js"
+  ]
 }

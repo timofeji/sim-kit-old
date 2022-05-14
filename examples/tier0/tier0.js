@@ -1,53 +1,26 @@
 "use strict";
 
-console.log("AAAAAAAAA")
-window.onload = () => {
-    let currentTime = 0;
-    let lastTime = 0;
-    let deltaTime = 0;
-    let canvas = document.getElementById("canvas");
+// let Systems = window.Systems;
 
-    //Instantiate game instance
-    let scene = new World();
-    // scene.gl = canvas.getContext("webgl");
+// let Engine = sim-kit;
 
-    initRenderer(game);
-
-    //resize
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    window.addEventListener("resize", (event) => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        resizeViewport(game.gl, window.innerWidth, window.innerHeight);
-    });
+// //Initialize world
+let world = new Engine.World();
+let renderer = new Engine.Renderer();
+Engine.addSystem(world);
 
 
+// let entity = world.createEntity();
+// entity.addComponent(new MeshComponent());
 
-    //main loop ~ executes each anim frame to simulate and render game
-    let main = () => {
-        //Get current delta
-        currentTime = performance.now();
-        deltaTime = (currentTime - lastTime) / 1000.0;
+world.addSystem(renderer);
 
-        // /resize canvas
-        if (!game.gl) {
-            console.log("Failed to get the rendering context for WebGL");
-            return;
-        }
+//Game thread
+world.update = () => {
+}
 
-        console.log(deltaTime);
+//Render thread
+renderer.update = () => {
+}
 
-        // // Simulate
-        // simulate(game, deltaTime);
-
-        // //Render
-        // render(game, deltaTime);
-
-        lastTime = currentTime;
-        requestAnimationFrame(main);
-    };
-
-    console.log("starting game yo");
-    requestAnimationFrame(main);
-};
+initEngine(world);

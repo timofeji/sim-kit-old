@@ -3,6 +3,7 @@ import { Configuration } from "webpack";
 
 const config: Configuration = {
   entry: "./src/engine.ts",
+  devtool: "inline-source-map",
   module: {
     rules: [
       {
@@ -27,11 +28,9 @@ const config: Configuration = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "sim-kit.js",
-  },
-  devServer: {
-    static: path.join(__dirname, "dist"),
-    compress: true,
-    port: 4000,
+    library: "Engine",
+    libraryTarget: 'umd',
+    globalObject: 'this',
   },
 };
 
