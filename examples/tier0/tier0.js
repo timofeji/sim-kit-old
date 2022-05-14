@@ -6,21 +6,13 @@
 
 // //Initialize world
 let world = new Engine.World();
+
 let renderer = new Engine.Renderer();
-Engine.addSystem(world);
+world.systems.push(renderer);
+
+let entity = new Engine.Entity();
+entity.components.push(new Engine.MeshComponent());
+world.entities.push(renderer);
 
 
-// let entity = world.createEntity();
-// entity.addComponent(new MeshComponent());
-
-world.addSystem(renderer);
-
-//Game thread
-world.update = () => {
-}
-
-//Render thread
-renderer.update = () => {
-}
-
-initEngine(world);
+Engine.initEngine(world);
