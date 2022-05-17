@@ -2,6 +2,7 @@ import path from "path";
 import { Configuration } from "webpack";
 
 const config: Configuration = {
+  mode: "development",
   entry: "./src/engine.ts",
   devtool: "inline-source-map",
   module: {

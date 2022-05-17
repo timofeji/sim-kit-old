@@ -11,5 +11,4 @@ describe("T1: Math", () => {
     v1.add(v2);
     assert.equal(v1.equals(new vector3(3,5,3)), true);
   });
-
 });
