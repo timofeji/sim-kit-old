@@ -1,9 +1,6 @@
 export * from "./systems/render";
-declare global {
-  //cache gl context for rendering
-  let _gl: WebGLRenderingContext;
-  let _canvas: any;
-}
+
+
 export interface ISystem {
   update: (world: World, deltaTime: number) => World;
 }
@@ -14,17 +11,6 @@ export class Entity {
 export class World {
   entities: Array<Entity> = [];
   systems: Array<ISystem> = [];
-
-  constructor(c: any) {
-    _gl = c.getContext("webgl");
-    _canvas = c;
-
-    if (!_gl) {
-      console.log("Failed to get the rendering context for WebGL");
-      return;
-    }
-  }
-
   GetEntitiesByComponentType(t: any) {
     return this.entities.filter((e) => {
       return e.components.filter((c) => {
@@ -52,15 +38,6 @@ export const initEngine = (world: World) => {
     lastTime = currentTime;
     requestAnimationFrame(main);
   };
-
-    // window.addEventListener("resize", (event) => {
-    //   if (canvas === undefined) {
-    //     return;
-    //   }
-    //   canvas.width = window.innerWidth;
-    //   canvas.height = window.innerHeight;
-    //   //   resizeViewport(game.gl, window.innerWidth, window.innerHeight);
-    // });
 
 
   requestAnimationFrame(main);

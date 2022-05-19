@@ -15,5 +15,5 @@
   "include": [
     "src/**/*",
     "webpack.config.js"
-  ]
+, "renderer.ts"  ]
 }

@@ -1,10 +1,18 @@
 import path from "path";
-import { Configuration } from "webpack";
+import webpack from "webpack";
+import "webpack-dev-server";
 
-const config: Configuration = {
+const config: webpack.Configuration = {
   mode: "development",
   entry: "./src/engine.ts",
   devtool: "inline-source-map",
+  devServer: {
+    static: {
+      directory: path.resolve(__dirname, "./examples/"),
+      publicPath: "/examples",
+    },
+    port: 9000,
+  },
   module: {
     rules: [
       {
@@ -30,8 +38,8 @@ const config: Configuration = {
     path: path.resolve(__dirname, "dist"),
     filename: "sim-kit.js",
     library: "Engine",
-    libraryTarget: 'umd',
-    globalObject: 'this',
+    libraryTarget: "umd",
+    globalObject: "this",
   },
 };
 

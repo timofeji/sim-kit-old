@@ -1,9 +1,7 @@
-import matrix4 from "./math/matrix4";
-import { vector3 } from "./math/vector3";
-import { IMaterial } from "./types/IMaterial";
-import { IMesh } from "./types/IMesh";
+import matrix4 from "../math/matrix4";
+import { vector3 } from "../math/vector3";
 
-export class Box3D implements IMesh{
+export class Box3D implements IMeshComponent{
     m_VERTICES: any;
     m_INDICES: any;
     m_NORMALS: any;
